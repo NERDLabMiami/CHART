@@ -26,6 +26,14 @@ public class NavigationUI : MonoBehaviour
         }
         previousScreen = transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>().GetComponentInParent<Animator>();
         sceneToLoad = scene;
+        if (GetComponent<SiteListing>())
+        {
+            //WHICH SITE WAS SELECTED:
+            Debug.Log("CHANGING SELECTED LOCATION INDEX!");
+            siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
+
+        }
+
         StartCoroutine(LoadScene());
 //        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }
@@ -58,7 +66,15 @@ public class NavigationUI : MonoBehaviour
             if(GetComponent<SiteListing>())
             {
                 //WHICH SITE WAS SELECTED:
+                Debug.Log("CHANGING SELECTED LOCATION INDEX!");
                 siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
+                if(GetComponent<SiteListing>().GetComponentInParent<Populator>())
+                {
+                    GetComponent<SiteListing>().GetComponentInParent<Populator>().headerTitle.text = siteDatabase.GetLocationTitle(GetComponent<SiteListing>().index);
+
+
+                }
+
             }
         }
         //SET NEW ACTIVE SCENE

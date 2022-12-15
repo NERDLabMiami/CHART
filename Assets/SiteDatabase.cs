@@ -91,7 +91,10 @@ public class SiteDatabase : MonoBehaviour
         Debug.Log("LOCATIONS FOUND: " + locations.Count);
        
     }
-
+    public string GetLocationTitle(int index)
+    {
+        return locations[index].title;
+    }
     public void PopulateList(Transform t, GameObject prefab, GameObject titleObject)
     {
         if(prefab.GetComponent<SiteListing>())
@@ -112,8 +115,14 @@ public class SiteDatabase : MonoBehaviour
         {
             if (titleObject.GetComponent<Populator>())
             {
+
+                Debug.Log("TITLE # " + selectedLocationIndex + ": " + locations[selectedLocationIndex].title);
                 titleObject.GetComponent<Populator>().headerTitle.text = locations[selectedLocationIndex].title;
 
+            }
+            else
+            {
+                Debug.Log("No Populator Component Found.");
             }
 
             for (int i = 0; i < locations[selectedLocationIndex].sites.Count; i++)
