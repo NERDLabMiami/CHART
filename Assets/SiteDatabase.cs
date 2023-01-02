@@ -9,17 +9,20 @@ public struct PointOfInterest
 {
     //Variable declaration
     public string title;
-    public VideoClip video;
+    public string description;
+    public Sprite image;
+    public string videoPath;
     public AudioClip podcast;
-    public Sprite[] illustrations;
-
+    public string illustrationPath;
 
     //Constructor (not necessary, but helpful)
-    public PointOfInterest(string _title, string videoPath, string podcastPath, string illustrationPath)
+    public PointOfInterest(string _title, string _description, string imagePath, string _videoPath, string podcastPath, string illustrationPath)
     {
         this.title = _title;
-        this.video = Resources.Load<VideoClip>(videoPath);
-        this.illustrations = Resources.LoadAll<Sprite>(illustrationPath);
+        this.description = _description;
+        this.image = Resources.Load<Sprite>(imagePath);
+        this.videoPath = _videoPath; 
+        this.illustrationPath = illustrationPath;
         this.podcast = Resources.Load<AudioClip>(podcastPath);
     }
 }
@@ -39,6 +42,7 @@ struct Location
     {
         this.title = _title;
         this.description = _description;
+        Debug.Log("IMAGE PATH: " + imagePath);
         this.image = Resources.Load<Sprite>(imagePath);
         this.sites = _sites;
     }
@@ -70,11 +74,12 @@ public class SiteDatabase : MonoBehaviour
                 for(int j = 0; j < landmarks.count; j++)
                 {
                     string landmark_title = landmarks[j].GetField("title").stringValue;
-                    string landmark_video = landmarks[j].GetField("title").stringValue;
-                    string landmark_podcast = landmarks[j].GetField("title").stringValue;
+                    string landmark_description = landmarks[j].GetField("description").stringValue;
+                    string landmark_video = landmarks[j].GetField("video").stringValue;
+                    string landmark_podcast = landmarks[j].GetField("podcast").stringValue;
                     string landmark_thumbnail = landmarks[j].GetField("imagepath").stringValue;
                     string landmark_illustration_path = landmarks[j].GetField("illustrations").stringValue;
-                    PointOfInterest newLandmark = new PointOfInterest(landmark_title, landmark_video, landmark_podcast, landmark_illustration_path);
+                    PointOfInterest newLandmark = new PointOfInterest(landmark_title, landmark_description, landmark_thumbnail, landmark_video, landmark_podcast, landmark_illustration_path);
                     pois.Add(newLandmark);
                 }
 
@@ -106,7 +111,7 @@ public class SiteDatabase : MonoBehaviour
                 go.GetComponent<SiteListing>().description.text = locations[i].description;
                 go.GetComponent<SiteListing>().index = i;
                 //TODO: Update JSON to have actual images selected
-                //go.GetComponent<SiteListing>().thumbnail.sprite = locations[i].image;
+                go.GetComponent<SiteListing>().thumbnail.sprite = locations[i].image;
 
 
             }
@@ -118,7 +123,7 @@ public class SiteDatabase : MonoBehaviour
 
                 Debug.Log("TITLE # " + selectedLocationIndex + ": " + locations[selectedLocationIndex].title);
                 titleObject.GetComponent<Populator>().headerTitle.text = locations[selectedLocationIndex].title;
-
+                titleObject.GetComponent<Populator>().headerImage.sprite = locations[selectedLocationIndex].image;
             }
             else
             {
@@ -129,7 +134,10 @@ public class SiteDatabase : MonoBehaviour
             {
                 GameObject go = Instantiate(prefab, t);
                 go.GetComponent<Landmark>().title.text = locations[selectedLocationIndex].sites[i].title;
-                go.GetComponent<Landmark>().description.text = locations[selectedLocationIndex].sites[i].title;
+                go.GetComponent<Landmark>().description.text = locations[selectedLocationIndex].sites[i].description;
+                go.GetComponent<Landmark>().thumbnail.sprite = locations[selectedLocationIndex].sites[i].image;
+                go.GetComponent<Landmark>().pathToIllustrations = locations[selectedLocationIndex].sites[i].illustrationPath;
+                go.GetComponent<Landmark>().pathTo360Video = locations[selectedLocationIndex].sites[i].videoPath;
                 go.GetComponent<Landmark>().index = i;
             }
         }

@@ -929,6 +929,7 @@ MonoBehaviour:
   prefabTemplate: {fileID: 3383080402176856183, guid: e344aeb3584387c42bba29d4f96c3f60,
     type: 3}
   headerTitle: {fileID: 1691216759}
+  headerImage: {fileID: 1967213538}
 --- !u!1 &1129601801
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,9 +10,10 @@ public class Landmark : MonoBehaviour
     public TextMeshProUGUI description;
     public Image thumbnail;
     public int index;
-    public UnityEngine.Video.VideoClip presentDay360Video;
+//    public UnityEngine.Video.VideoClip presentDay360Video;
     public AudioClip podcast;
     public string pathToIllustrations;
+    public string pathTo360Video;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,8 @@ public class Landmark : MonoBehaviour
     {
         //TRACK VISIT IN PREFS
         PlayerPrefs.SetInt(title.text, 1);
+        PlayerPrefs.SetString("illustration_path", pathToIllustrations);
+        PlayerPrefs.SetString("video_path", pathTo360Video);
     }
 
 }
