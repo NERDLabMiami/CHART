@@ -14,10 +14,15 @@ public class Slideshow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadSlideshow();
+    }
+
+    public void LoadSlideshow()
+    {
         images = new List<GameObject>();
         Sprite[] sprites = Resources.LoadAll<Sprite>(PlayerPrefs.GetString("illustration_path"));
         Debug.Log("FOUND " + sprites.Length + " images in " + PlayerPrefs.GetString("illustration_path"));
-        for(int i = 0; i < sprites.Length; i++)
+        for (int i = 0; i < sprites.Length; i++)
         {
             GameObject go = Instantiate(imageTemplate, transform);
             go.GetComponent<Image>().sprite = sprites[i];
@@ -25,10 +30,18 @@ public class Slideshow : MonoBehaviour
 
         }
 
-
-        Debug.Log("IMAGES: " + images.Count);
         ShowImage(currentImageIndex);
         timeUntilNextTransition = Time.time + timeBetweenImages;
+
+    }
+
+    public void ResetSlideshow()
+    {
+        images.Clear();
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     void ShowImage(int index)

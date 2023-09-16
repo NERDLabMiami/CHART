@@ -12,18 +12,18 @@ public struct PointOfInterest
     public string description;
     public Sprite image;
     public string videoPath;
-    public AudioClip podcast;
+    public string podcastPath;
     public string illustrationPath;
 
     //Constructor (not necessary, but helpful)
-    public PointOfInterest(string _title, string _description, string imagePath, string _videoPath, string podcastPath, string illustrationPath)
+    public PointOfInterest(string _title, string _description, string imagePath, string _videoPath, string _podcastPath, string illustrationPath)
     {
         this.title = _title;
         this.description = _description;
         this.image = Resources.Load<Sprite>(imagePath);
         this.videoPath = _videoPath; 
         this.illustrationPath = illustrationPath;
-        this.podcast = Resources.Load<AudioClip>(podcastPath);
+        this.podcastPath = _podcastPath;
     }
 }
 
@@ -51,8 +51,9 @@ public class SiteDatabase : MonoBehaviour
 {
     public TextAsset jsonDatabase;
     public int selectedLocationIndex = 0;
+    public int selectedSiteIndex = 0;
     private List<Location> locations;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -138,9 +139,43 @@ public class SiteDatabase : MonoBehaviour
                 go.GetComponent<Landmark>().thumbnail.sprite = locations[selectedLocationIndex].sites[i].image;
                 go.GetComponent<Landmark>().pathToIllustrations = locations[selectedLocationIndex].sites[i].illustrationPath;
                 go.GetComponent<Landmark>().pathTo360Video = locations[selectedLocationIndex].sites[i].videoPath;
+                go.GetComponent<Landmark>().pathToPodcast = locations[selectedLocationIndex].sites[i].podcastPath;
                 go.GetComponent<Landmark>().index = i;
             }
         }
     }
-    
+
+    public void NextSite()
+    {
+        selectedSiteIndex = PlayerPrefs.GetInt("selected_site_index");
+        selectedSiteIndex++;
+        if(selectedSiteIndex >= locations[selectedLocationIndex].sites.Count)
+        {
+            selectedSiteIndex = 0;
+        }
+        PlayerPrefs.SetInt("selected_site_index", selectedSiteIndex);
+        LoadSite();
+    }
+
+    public void PreviousSite()
+    {
+        selectedSiteIndex = PlayerPrefs.GetInt("selected_site_index");
+        selectedSiteIndex--;
+        if (selectedSiteIndex < 0 )
+        {
+            selectedSiteIndex = locations[selectedLocationIndex].sites.Count - 1;
+        }
+        PlayerPrefs.SetInt("selected_site_index", selectedSiteIndex);
+        LoadSite();
+    }
+
+    public void LoadSite()
+    {
+        PlayerPrefs.SetString("illustration_path", locations[selectedLocationIndex].sites[selectedSiteIndex].illustrationPath);
+        PlayerPrefs.SetString("video_path", locations[selectedLocationIndex].sites[selectedSiteIndex].videoPath);
+        PlayerPrefs.SetString("podcast_path", locations[selectedLocationIndex].sites[selectedSiteIndex].podcastPath);
+        PlayerPrefs.SetString("selected_landmark", locations[selectedLocationIndex].sites[selectedSiteIndex].title);
+
+    }
+
 }

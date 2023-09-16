@@ -10,7 +10,13 @@ public class PresentDay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadClip();
+    }
+
+    public void LoadClip()
+    {
         video.clip = Resources.Load<VideoClip>(PlayerPrefs.GetString("video_path"));
+
     }
 
     // Update is called once per frame

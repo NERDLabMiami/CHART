@@ -10,8 +10,8 @@ public class Landmark : MonoBehaviour
     public TextMeshProUGUI description;
     public Image thumbnail;
     public int index;
-//    public UnityEngine.Video.VideoClip presentDay360Video;
-    public AudioClip podcast;
+    //    public UnityEngine.Video.VideoClip presentDay360Video;
+    public string pathToPodcast;
     public string pathToIllustrations;
     public string pathTo360Video;
 
@@ -37,8 +37,11 @@ public class Landmark : MonoBehaviour
     {
         //TRACK VISIT IN PREFS
         PlayerPrefs.SetInt(title.text, 1);
+        PlayerPrefs.SetString("selected_landmark", title.text);
         PlayerPrefs.SetString("illustration_path", pathToIllustrations);
         PlayerPrefs.SetString("video_path", pathTo360Video);
+        PlayerPrefs.SetString("podcast_path", pathToPodcast);
+        PlayerPrefs.SetInt("selected_site_index", index);
     }
 
 }
