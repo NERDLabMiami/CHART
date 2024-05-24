@@ -128,6 +128,7 @@ public class NavigationUI : MonoBehaviour
             previousSceneBuildIndex = 0;
         }
         GameObject[] previousSceneGameObjects = SceneManager.GetSceneByBuildIndex(previousSceneBuildIndex).GetRootGameObjects();
+
         for (int i = 0; i < previousSceneGameObjects.Length; i++)
         {
             if(previousSceneGameObjects[i].GetComponent<Canvas>())

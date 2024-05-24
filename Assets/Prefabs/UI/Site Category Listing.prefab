@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8311638306501045453}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -88,7 +87,7 @@ GameObject:
   - component: {fileID: 1784687504368956953}
   - component: {fileID: 8501283814271106620}
   m_Layer: 5
-  m_Name: Site Description
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,12 +106,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5593970534805785800}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -100}
-  m_SizeDelta: {x: 500, y: 150}
+  m_SizeDelta: {x: 1300, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1784687504368956953
 CanvasRenderer:
@@ -142,9 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is a short
-
-    description of the site.'
+  m_text: Narrated stories about Egmont Key
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03ae39026021fb949b5456a942801925, type: 2}
   m_sharedMaterial: {fileID: 3063711228296183965, guid: 03ae39026021fb949b5456a942801925,
@@ -245,7 +241,6 @@ RectTransform:
   - {fileID: 3539832353530767269}
   - {fileID: 213194632990215086}
   m_Father: {fileID: 9015621137863252046}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -283,11 +278,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9015621137863252046}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -40, y: -50}
+  m_AnchoredPosition: {x: -100, y: -50}
   m_SizeDelta: {x: 102, y: 102}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &5231700548997222503
@@ -339,10 +333,9 @@ GameObject:
   - component: {fileID: 9015621137863252046}
   - component: {fileID: 7140989415220521909}
   - component: {fileID: 7786335245943708915}
-  - component: {fileID: 2542620083917985930}
   - component: {fileID: 1772581812837591391}
   m_Layer: 5
-  m_Name: Landmark Listing
+  m_Name: Site Category Listing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,7 +358,6 @@ RectTransform:
   - {fileID: 5593970534805785800}
   - {fileID: 5653566716406793064}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -428,18 +420,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2542620083917985930}
-        m_TargetAssemblyTypeName: Landmark, Assembly-CSharp
-        m_MethodName: Visit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7140989415220521909}
         m_TargetAssemblyTypeName: NavigationUI, Assembly-CSharp
         m_MethodName: LoadScene
@@ -449,28 +429,9 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Landmark
+          m_StringArgument: Podcasts
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2542620083917985930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383080402176856183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70273c0e64ac5df41b385d2b6e383bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: {fileID: 4394125413853382205}
-  description: {fileID: 8501283814271106620}
-  thumbnail: {fileID: 8325223949116612025}
-  index: 0
-  presentDay360Video: {fileID: 0}
-  podcast: {fileID: 0}
-  pathToIllustrations: 
 --- !u!222 &1772581812837591391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -512,7 +473,6 @@ RectTransform:
   m_Children:
   - {fileID: 342888301988649737}
   m_Father: {fileID: 9015621137863252046}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -582,7 +542,7 @@ GameObject:
   - component: {fileID: 5275033222768237704}
   - component: {fileID: 4394125413853382205}
   m_Layer: 5
-  m_Name: Site Name
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,7 +561,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5593970534805785800}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -636,7 +595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pathway
+  m_text: Podcasts
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5940914bdccbcc40afa053aaf074f7f, type: 2}
   m_sharedMaterial: {fileID: 6903587684277792607, guid: e5940914bdccbcc40afa053aaf074f7f,
@@ -664,10 +623,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 65.4
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -738,12 +697,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9015621137863252046}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75, y: 0}
-  m_SizeDelta: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1743383920090851574
 CanvasRenderer:
