@@ -803,7 +803,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 223763735}
   m_Direction: 2
   m_Value: 0.99999976
-  m_Size: 0.64427024
+  m_Size: 0.6442702
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2174,7 +2174,7 @@ PrefabInstance:
     - target: {fileID: 4969668361779751564, guid: 34e61097fdc7daa49b0d33bc8783648b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Site
+      value: Egmont Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

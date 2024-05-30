@@ -790,8 +790,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1129601803}
   m_HandleRect: {fileID: 1129601802}
   m_Direction: 0
-  m_Value: 0.0000035902776
-  m_Size: 0.9911458
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1724,7 +1724,7 @@ PrefabInstance:
     - target: {fileID: 4969668361779751564, guid: 34e61097fdc7daa49b0d33bc8783648b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Site
+      value: Egmont Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
