@@ -12,7 +12,7 @@ public class NavigationUI : MonoBehaviour
     private SiteDatabase siteDatabase;
     void Start()
     {
-        siteDatabase = FindObjectOfType<SiteDatabase>();
+      //  siteDatabase = FindObjectOfType<SiteDatabase>();
 
     }
 
@@ -30,7 +30,7 @@ public class NavigationUI : MonoBehaviour
         {
             //WHICH SITE WAS SELECTED:
             Debug.Log("CHANGING SELECTED LOCATION INDEX!");
-            siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
+//            siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
 
         }
 
