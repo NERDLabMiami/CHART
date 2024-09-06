@@ -5,22 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class NavigationUI : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Animator previousScreen;
     private string sceneToUnload;
     private string sceneToLoad;
     private SiteDatabase siteDatabase;
+
     void Start()
     {
-      //  siteDatabase = FindObjectOfType<SiteDatabase>();
-
+        // siteDatabase = FindObjectOfType<SiteDatabase>();
     }
-
 
     public void LoadScene(string scene)
     {
-        
-        if(transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>())
+        if (transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>())
         {
             transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>().GetComponentInParent<Animator>().SetBool("Open", false);
         }
@@ -28,92 +25,69 @@ public class NavigationUI : MonoBehaviour
         sceneToLoad = scene;
         if (GetComponent<SiteListing>())
         {
-            //WHICH SITE WAS SELECTED:
+            // WHICH SITE WAS SELECTED:
             Debug.Log("CHANGING SELECTED LOCATION INDEX!");
-//            siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
-
+            // siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
         }
 
-        StartCoroutine(LoadScene());
-//        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        StartCoroutine(LoadSceneWithCameraHandling());
     }
 
-
-    IEnumerator LoadScene()
+    IEnumerator LoadSceneWithCameraHandling()
     {
         yield return null;
 
-        //Begin to load the Scene you specify
-
+        // Begin to load the Scene you specify
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
-        //Don't let the Scene activate until you allow it to
-//        asyncOperation.allowSceneActivation = false;
-        //When the load is still in progress, output the Text and progress bar
+
         while (!asyncOperation.isDone)
         {
-            //Output the current progress?
-
-            // Check if the load has finished
+            // Output the current progress
             if (asyncOperation.progress >= 0.9f)
             {
-                //Wait to you press the space key to activate the Scene?
+                // Scene is almost loaded, deactivate any other cameras
+                DeactivateOtherCameras(sceneToLoad);
             }
 
             yield return null;
         }
+
         if (siteDatabase)
         {
-            if(GetComponent<SiteListing>())
+            if (GetComponent<SiteListing>())
             {
-                //WHICH SITE WAS SELECTED:
+                // WHICH SITE WAS SELECTED:
                 Debug.Log("CHANGING SELECTED LOCATION INDEX!");
                 siteDatabase.selectedLocationIndex = GetComponent<SiteListing>().index;
-                if(GetComponent<SiteListing>().GetComponentInParent<Populator>())
+                if (GetComponent<SiteListing>().GetComponentInParent<Populator>())
                 {
                     GetComponent<SiteListing>().GetComponentInParent<Populator>().headerTitle.text = siteDatabase.GetLocationTitle(GetComponent<SiteListing>().index);
-
-
                 }
-
             }
         }
-        //SET NEW ACTIVE SCENE
 
+        // Set new active scene
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
-
-
     }
-
 
     IEnumerator UnloadScene()
     {
         yield return null;
 
-        //Begin to load the Scene you specify
+        // Begin to unload the Scene you specify
         AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(sceneToUnload);
-        //Don't let the Scene activate until you allow it to
         asyncOperation.allowSceneActivation = false;
-        //When the load is still in progress, output the Text and progress bar
+
         while (!asyncOperation.isDone)
         {
-            //Output the current progress?
-
             // Check if the load has finished
-            if (asyncOperation.progress >= 0.9f)
-            {
-                //Wait to you press the space key to activate the Scene?
-            }
-
             yield return null;
         }
     }
 
-
-
     public void SetSceneToUnload(string scene)
     {
-       
-        if(previousScreen)
+        if (previousScreen)
         {
             Debug.Log("Previous Scene: " + scene);
             previousScreen.SetBool("Open", true);
@@ -122,25 +96,23 @@ public class NavigationUI : MonoBehaviour
         {
             Debug.Log("No previous scene found...");
         }
-        int previousSceneBuildIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        if(previousSceneBuildIndex < 0)
-        {
-            previousSceneBuildIndex = 0;
-        }
-        GameObject[] previousSceneGameObjects = SceneManager.GetSceneByBuildIndex(previousSceneBuildIndex).GetRootGameObjects();
 
-        for (int i = 0; i < previousSceneGameObjects.Length; i++)
+        sceneToUnload = scene;
+        StartCoroutine(UnloadScene());
+    }
+
+    private void DeactivateOtherCameras(string activeSceneName)
+    {
+        // Deactivate all cameras except for the one in the newly loaded scene
+        Camera[] allCameras = Camera.allCameras;
+
+        foreach (Camera cam in allCameras)
         {
-            if(previousSceneGameObjects[i].GetComponent<Canvas>())
+            if (cam.gameObject.scene.name != activeSceneName && cam.CompareTag("MainCamera"))
             {
-                if(previousSceneGameObjects[i].GetComponent<Canvas>().GetComponent<Animator>())
-                {
-                    previousSceneGameObjects[i].GetComponent<Canvas>().GetComponent<Animator>().SetBool("Open", true);
-                }
+                // Deactivate cameras in other scenes
+                cam.gameObject.SetActive(false);
             }
         }
-
-            sceneToUnload = scene;
-        StartCoroutine(UnloadScene());
     }
 }
