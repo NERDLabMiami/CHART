@@ -17,12 +17,20 @@ public class NavigationUI : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        if (transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>())
+        AnimatableScreen animatableScreen = GetComponentInParent<AnimatableScreen>();
+        if (animatableScreen != null)
         {
-            transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>().GetComponentInParent<Animator>().SetBool("Open", false);
+            Animator animator = animatableScreen.GetComponentInParent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Open", false);
+                previousScreen = animator;  // Store reference to the previous screen's animator
+            }
         }
-        previousScreen = transform.parent.parent.parent.parent.GetComponentInParent<AnimatableScreen>().GetComponentInParent<Animator>();
+
         sceneToLoad = scene;
+
+
         if (GetComponent<SiteListing>())
         {
             // WHICH SITE WAS SELECTED:
@@ -87,20 +95,36 @@ public class NavigationUI : MonoBehaviour
 
     public void SetSceneToUnload(string scene)
     {
-        if (previousScreen)
+        AnimatableScreen animatableScreen = GetComponentInParent<AnimatableScreen>();
+        if (animatableScreen != null)
         {
-            Debug.Log("Previous Scene: " + scene);
-            previousScreen.SetBool("Open", true);
+            Animator animator = animatableScreen.GetComponentInParent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Open", false);
+                previousScreen = animator;  // Store reference to the previous screen's animator
+            }
         }
-        else
-        {
-            Debug.Log("No previous scene found...");
-        }
+
+        sceneToLoad = scene;
 
         sceneToUnload = scene;
         StartCoroutine(UnloadScene());
     }
 
+    private void ActivatePreviousCamera(string activeSceneName)
+    {
+        Camera[] allCameras = Camera.allCameras;
+
+        foreach (Camera cam in allCameras)
+        {
+            if (cam.gameObject.scene.name == activeSceneName && cam.CompareTag("MainCamera"))
+            {
+                cam.gameObject.SetActive(true);
+            }
+        }
+
+    }
     private void DeactivateOtherCameras(string activeSceneName)
     {
         // Deactivate all cameras except for the one in the newly loaded scene

@@ -18,13 +18,14 @@ public class Playhead : MonoBehaviour
 
     private void PodcastLoaded()
     {
-        slider.maxValue = podcast.audioClip.length;
+//        slider.maxValue = podcast.audioClip.length;
         audioLengthSet = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+/*
         if(podcast.isLoaded)
         {
             slider.value = podcast.tour.time;
@@ -32,6 +33,9 @@ public class Playhead : MonoBehaviour
             {
                 PodcastLoaded();
             }
+
         }
+*/
     }
 }
+

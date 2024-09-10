@@ -1,70 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Podcast : MonoBehaviour
 {
-    public List<Slideshow> chapters;
-    public AudioSource tour;
-    public AudioClip audioClip;
-    public Sprite pauseButton;
-    public Sprite unpauseButton;
-    public bool isLoaded = false;
-    
-    //TODO:
-    //SCRUBBING
+    public Slideshow[] chapters; // Array of chapters (slideshows)
+    private int currentChapter = 0; // Make sure this starts at 0
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-        int chapter = PlayerPrefs.GetInt("chapter", 0);
-        Debug.Log("CHAPTER SELECTED: " + chapter);
-        for(int i = 0; i < chapters.Count; i++)
+        // Load the saved chapter index, if any, otherwise default to 0
+        currentChapter = PlayerPrefs.GetInt("chapter", 0);
+        Debug.Log("Starting at chapter: " + currentChapter);
+
+        // Ensure currentChapter is within bounds
+        if (currentChapter < 0 || currentChapter >= chapters.Length)
         {
-            Debug.Log("CHAPTER: " + chapters[i].chapter);
-            if(chapters[i].chapter == chapter)
+            currentChapter = 0; // Default to chapter 0 if out of bounds
+        }
+
+        // Start the first chapter
+        if (chapters.Length > 0)
+        {
+            StartChapter(chapters[currentChapter]);
+        }
+    }
+
+    public void StartChapter(Slideshow slideshow)
+    {
+        Debug.Log("Starting chapter: " + currentChapter);
+        slideshow.gameObject.SetActive(true); // Activate the current chapter
+        slideshow.StartSlideshow(); // Start the slideshow
+    }
+
+    public void NextChapter()
+    {
+        // Deactivate the current chapter and activate the next chapter if available
+        if (currentChapter < chapters.Length)
+        {
+            chapters[currentChapter].gameObject.SetActive(false);
+            currentChapter++;
+
+            if (currentChapter < chapters.Length)
             {
-                chapters[i].gameObject.SetActive(true);
+                StartChapter(chapters[currentChapter]);
             }
             else
             {
-                chapters[i].gameObject.SetActive(false);
-
+                Debug.Log("No more chapters to play.");
             }
         }
-//        StartTour();
-    
-        }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
-
-    public void StartTour()
-    {
-        /*
-        audioClip = Resources.Load<AudioClip>(PlayerPrefs.GetString("podcast_path"));
-        tour.clip = audioClip;
-        tour.Play();
-        isLoaded = true;
-    */
-        }
-
-    public void TogglePlayPause()
-    {
-        if(tour.isPlaying)
-        {
-            tour.Pause();
-        }
-        else
-        {
-            tour.UnPause();
-        }
-
-    }
-
 }

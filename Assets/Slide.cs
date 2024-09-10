@@ -1,120 +1,120 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Slide : MonoBehaviour
 {
-    public AudioClip clip; // Audio clip associated with the slide
-    public List<FocalPoint> focalPoints; // List of focal points to move to
-    public float transitionDuration = 1f; // Duration for the movement between focal points
+    public AudioClip clip; // Audio clip associated with this slide
+    public FocalPoint[] focalPoints; // Array of focal points
+    public float durationMultiplier = 1f; // Adjusts the relative length of this slide's display time
 
-    private int currentFocalPointIndex = 0; // Track current focal point
-    public bool slideCompleted = false; // Track slide completion
-    private Slideshow parentSlideshow; // Reference to the parent slideshow
-    private AudioSource cameraAudioSource; // AudioSource attached to the camera
-
-    private Vector3 currentScale; // Track the current scale of the image
+    private int currentFocalPointIndex = 0;
+    private bool isTransitioning = false;
+    public AudioSource audioSource; // Direct reference to the AudioSource (assign manually in editor)
+    public bool slideCompleted = false;
 
     void Start()
     {
-        // Set the initial zoom level to the current scale
-        currentScale = transform.localScale = Vector3.one;
-
-        // Find the AudioSource attached to the camera
-        cameraAudioSource = Camera.main.GetComponent<AudioSource>();
-
-        // Play audio if there is a clip and the AudioSource is available
-        if (clip != null && cameraAudioSource != null)
+        // Log to check if AudioSource is assigned
+        if (audioSource != null)
         {
-            cameraAudioSource.clip = clip;
-            cameraAudioSource.Play();
+            Debug.Log($"AudioSource is assigned to Slide {gameObject.name}");
         }
-
-        // Begin the transition to the first focal point if available
-        if (focalPoints.Count > 0)
+        else
         {
-            StartCoroutine(MoveToFocalPoint(focalPoints[currentFocalPointIndex]));
+            Debug.LogError($"AudioSource is null for Slide {gameObject.name}. Please assign it in the editor.");
         }
     }
 
-    public void StartTransition(Slideshow slideshow)
+    public void StartSlide()
     {
-        parentSlideshow = slideshow;
-
-        // If no focal points or we're done with all focal points, complete the slide
-        if (focalPoints.Count == 0 || currentFocalPointIndex >= focalPoints.Count)
+        // Check if the AudioClip is null
+        if (clip == null)
         {
-            SlideComplete();
+            Debug.LogError($"Slide {gameObject.name} does not have an AudioClip assigned. Make sure the clip is set in the editor.");
+            slideCompleted = true; // If no clip, mark the slide as complete
             return;
         }
 
-        StartCoroutine(MoveToFocalPoint(focalPoints[currentFocalPointIndex]));
+        // Check if the AudioSource is null
+        if (audioSource == null)
+        {
+            Debug.LogError($"AudioSource is null for Slide {gameObject.name}. Cannot play audio.");
+            slideCompleted = true; // If there's no audio source, mark the slide as complete
+            return;
+        }
+
+        // Play the assigned audio clip
+        Debug.Log($"Playing audio for Slide {gameObject.name}, Clip: {clip.name}");
+        audioSource.Stop();
+        audioSource.clip = clip;
+        audioSource.Play();
+
+        // Start moving through the focal points
+        StartCoroutine(MoveToFocalPoints());
     }
 
-    IEnumerator MoveToFocalPoint(FocalPoint focalPoint)
+    private IEnumerator MoveToFocalPoints()
     {
-        RectTransform slideRectTransform = GetComponent<RectTransform>();
+        Debug.Log($"Moving through focal points for Slide {gameObject.name}");
 
-        // Get the current position of the slide and the target position (relative to the focal point)
-        Vector2 initialPosition = slideRectTransform.anchoredPosition;
-        Vector2 targetPosition = GetTargetPosition(focalPoint);
+        // Iterate through each focal point
+        for (currentFocalPointIndex = 0; currentFocalPointIndex < focalPoints.Length; currentFocalPointIndex++)
+        {
+            FocalPoint focalPoint = focalPoints[currentFocalPointIndex];
+            yield return MoveToFocalPoint(focalPoint);
+        }
+
+        // Wait for the audio clip to finish
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+
+        slideCompleted = true; // Mark the slide as completed
+    }
+
+    private IEnumerator MoveToFocalPoint(FocalPoint focalPoint)
+    {
+        isTransitioning = true;
+
+        // Get the current RectTransform of the slide
+        RectTransform slideRect = GetComponent<RectTransform>();
+        if (slideRect == null)
+        {
+            Debug.LogError($"RectTransform not found on the Slide: {gameObject.name}");
+            yield break;
+        }
+
+        Vector2 initialPosition = slideRect.anchoredPosition;
+        Vector2 targetPosition = focalPoint.GetPosition();
+
+        // Invert the coordinates if necessary (flipping X and Y as required)
+        targetPosition.x = -targetPosition.x;
+        targetPosition.y = -targetPosition.y;
+
+        // Get the initial and target scale based on zoomLevel
+        Vector3 initialScale = slideRect.localScale;
         Vector3 targetScale = Vector3.one * focalPoint.zoomLevel;
 
         float elapsedTime = 0f;
+        float focalPointDuration = (clip.length / focalPoints.Length) * durationMultiplier;
 
-        // Smooth movement and zoom to the focal point over the transition duration
-        while (elapsedTime < transitionDuration)
+        while (elapsedTime < focalPointDuration)
         {
             elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / transitionDuration;
+            float progress = elapsedTime / focalPointDuration;
 
-            // Move the image toward the target position
-            slideRectTransform.anchoredPosition = Vector2.Lerp(initialPosition, targetPosition, progress);
-
-            // Gradually scale the image to reach the desired zoom level
-            slideRectTransform.localScale = Vector3.Lerp(currentScale, targetScale, progress);
+            // Move and scale the slide towards the focal point
+            slideRect.anchoredPosition = Vector2.Lerp(initialPosition, targetPosition, progress);
+            slideRect.localScale = Vector3.Lerp(initialScale, targetScale, progress);
 
             yield return null;
         }
 
-        // Ensure final alignment of slide's center with the focal point and set the final zoom level
-        slideRectTransform.anchoredPosition = targetPosition;
-        slideRectTransform.localScale = targetScale;
+        // Ensure the slide reaches the exact focal point position and scale
+        slideRect.anchoredPosition = targetPosition;
+        slideRect.localScale = targetScale;
 
-        // Set the current scale to the final scale for smooth transitions to the next focal point
-        currentScale = targetScale;
+        // Pause briefly at the focal point
+        yield return new WaitForSeconds(0.5f); // Adjust pause duration as needed
 
-        // Move to the next focal point if available
-        currentFocalPointIndex++;
-        if (currentFocalPointIndex < focalPoints.Count)
-        {
-            StartTransition(parentSlideshow);
-        }
-        else
-        {
-            SlideComplete();
-        }
-    }
-
-    // Calculate the target position to move the center of the slide to the center of the focal point
-    private Vector2 GetTargetPosition(FocalPoint focalPoint)
-    {
-        RectTransform focalRectTransform = focalPoint.GetComponent<RectTransform>();
-        RectTransform slideRectTransform = GetComponent<RectTransform>();
-
-        // The focal point's position is relative to the parent slide
-        return -focalRectTransform.anchoredPosition;
-    }
-
-    // Mark the slide as complete and inform the parent slideshow
-    public void SlideComplete()
-    {
-        slideCompleted = true;
-
-        // Inform the parent slideshow
-        if (parentSlideshow != null)
-        {
-            parentSlideshow.OnSlideComplete();
-        }
+        isTransitioning = false;
     }
 }

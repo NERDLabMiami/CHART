@@ -21,7 +21,7 @@ public class ToggleButton : MonoBehaviour
     }
     public void Toggle()
     {
-        if(podcast.tour.isPlaying)
+/*        if(podcast.tour.isPlaying)
         {
             GetComponent<Image>().sprite = pause;
         }
@@ -29,6 +29,7 @@ public class ToggleButton : MonoBehaviour
         {
             GetComponent<Image>().sprite = play;
         }
-    }
+*/
+        }
     
 }

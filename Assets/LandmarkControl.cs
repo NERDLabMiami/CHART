@@ -36,7 +36,7 @@ public class LandmarkControl : MonoBehaviour
         pastHeader.SetTitle();
         navigationHeader.SetTitle();
         presentDay.LoadClip();
-        podcast.StartTour();
+//        podcast.StartTour();
         /*
         slideshow.ResetSlideshow();
         slideshow.LoadSlideshow();
