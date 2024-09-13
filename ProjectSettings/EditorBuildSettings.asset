@@ -6,26 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 7eabea936f33f9c409471a6a67335d94
-  - enabled: 1
-    path: Assets/Scenes/Sites/Egmont Key/Egmont Key.unity
-    guid: 28926375b67938e41ba0e0f7f52c47ed
-  - enabled: 1
-    path: Assets/Scenes/Sites/Egmont Key/Podcasts.unity
-    guid: 40357ab6ddbca9d42a862e3cbc5d974c
-  - enabled: 1
-    path: Assets/Scenes/Chapter.unity
-    guid: 0ecea25af005d264fa35e5aed471d386
-  - enabled: 1
-    path: Assets/Scenes/Sites/Egmont Key/Videos.unity
-    guid: 75a431de331d810449cb1322480dbd91
-  - enabled: 1
-    path: Assets/Scenes/Video.unity
-    guid: e0f190d2d76fc4148a6371d17d06026c
-  - enabled: 1
-    path: Assets/Scenes/Sites/Landmark.unity
-    guid: 40abb8bcd380b114da4ea86a8ed7f027
+    path: Assets/Scenes/CHART.unity
+    guid: 90a93fd78dfcd41a784bf00e8d90f8a8
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

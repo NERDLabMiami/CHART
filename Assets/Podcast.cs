@@ -5,6 +5,12 @@ public class Podcast : MonoBehaviour
 {
     public Slideshow[] chapters; // Array of chapters (slideshows)
     private int currentChapter = 0; // Make sure this starts at 0
+
+    private void Start()
+    {
+        
+    }
+
     /*
     void Start()
     {
