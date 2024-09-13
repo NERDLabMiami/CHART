@@ -1,37 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Video;
 using TMPro;
+using UnityEngine.UI;
 
 public class VideoListing : MonoBehaviour
 {
-    public TextMeshProUGUI title;
-    public TextMeshProUGUI description;
-    public Image thumbnail;
-    public int clipNumber;
+    // Individual listing components
+    public TextMeshProUGUI title;       // Title of the video
+    public TextMeshProUGUI description; // Description of the video
+    public Image thumbnail;             // Thumbnail for the video
+    public VideoClip video;             // Video clip for this listing
 
-    // Start is called before the first frame update
-    void Start()
+    public VideoPlayer player;  // Shared VideoPlayer in the scene
+
+    // Method to play the video associated with this listing
+    public void PlayVideo()
     {
-        if (PlayerPrefs.HasKey(title.text))
+        // Set the video clip to the VideoPlayer
+        player.clip = video;
+
+        // Optionally update the title, description, and thumbnail on the UI (if relevant)
+        if (title != null)
         {
-            //HAS VISITED THIS CHAPTER. TRACK?
+            Debug.Log("Playing: " + title.text);
         }
-        else
+
+        if (description != null)
         {
+            Debug.Log("Description: " + description.text);
         }
+
+        if (thumbnail != null)
+        {
+            // You can do something with the thumbnail if needed
+        }
+        // Create a new material for the skybox
+//        Material skyboxMaterial = new Material(Shader.Find("Skybox/Panoramic"));
+
+        // Assign the VideoPlayer's texture to the skybox material
+//        skyboxMaterial.SetTexture("_MainTex", player.texture);
+
+        // Set the skybox for the current scene to the material
+//        RenderSettings.skybox = skyboxMaterial;
+        player.gameObject.SetActive(true);
+
+        // Play the video
+        player.Play();
     }
 
-    public void QueueVideo()
+    public void StopVideo()
     {
-        Debug.Log("QUEUING VIDEO " + clipNumber);
-        PlayerPrefs.SetInt("clip number", clipNumber);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (player != null && player.isPlaying)
+        {
+            player.Stop();
+        }
     }
 }

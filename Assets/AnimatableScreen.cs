@@ -21,6 +21,7 @@ public class AnimatableScreen : MonoBehaviour
     /// The transition factor (from 0 to 1) between inside and outside.
     [Range(0, 1)]
     public float transition;
+    public float transitionSpeed = 1.0f;
 
     /// Inside is assumed to be the start position of the RectTransform.
     private Vector2 inside;
@@ -46,25 +47,17 @@ public class AnimatableScreen : MonoBehaviour
 
     Vector2 GetGlobalPosition(RectTransform trans)
     {
-        // Calculate the global position of the RectTransform on the canvas
-        // by summing up all local positions of parents.
-        var pos = Vector3.zero;
-        foreach (var parent in trans.GetComponentsInParent<RectTransform>())
-        {
-            if (parent.GetComponent<Canvas>() == null)
-            {
-                pos += parent.localPosition;
-            }
-            else
-            {
-                return pos;
-            }
-        }
-        return pos;
+        Vector3[] corners = new Vector3[4];
+        trans.GetWorldCorners(corners);
+        // The center of the rect is the average of its four corners
+        return (corners[0] + corners[2]) / 2;
     }
+
+
 
     void Update()
     {
+        transition = Mathf.Lerp(transition, 1, Time.deltaTime * transitionSpeed);
         rectTransform.localPosition = Vector2.Lerp(outside, inside, transition);
     }
 
@@ -102,6 +95,13 @@ public class AnimatableScreen : MonoBehaviour
     public void ToggleVisible()
     {
         var anim = GetComponent<Animator>();
-        anim.SetBool("Hide", !anim.GetBool("Hide"));
+        if (anim != null)
+        {
+            anim.SetBool("Hide", !anim.GetBool("Hide"));
+        }
+        else
+        {
+            Debug.LogWarning("Animator component not found!");
+        }
     }
 }

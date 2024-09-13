@@ -5,7 +5,7 @@ public class Podcast : MonoBehaviour
 {
     public Slideshow[] chapters; // Array of chapters (slideshows)
     private int currentChapter = 0; // Make sure this starts at 0
-
+    /*
     void Start()
     {
         // Load the saved chapter index, if any, otherwise default to 0
@@ -50,4 +50,5 @@ public class Podcast : MonoBehaviour
             }
         }
     }
+    */
 }

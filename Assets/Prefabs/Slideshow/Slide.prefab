@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7040202907595590169}
   - component: {fileID: 2121855659548135188}
   - component: {fileID: 851699888080479080}
-  - component: {fileID: 3168526510929135638}
   m_Layer: 5
   m_Name: Slide
   m_TagString: Untagged
@@ -76,19 +75,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3168526510929135638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262224903192789851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0433edf1bcac17241b0e3d31cc750b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 0}
-  waitTime: 5
-  transitionDuration: 3
-  focalPoints: []

@@ -13,6 +13,7 @@ public struct Clip
 public class VideoList : MonoBehaviour
 {
     public List<Clip> videos;
+    public List<VideoClip> clips;
     public VideoPlayer player;
     // Start is called before the first frame update
     void Start()

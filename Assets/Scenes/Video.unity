@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -548,6 +547,9 @@ MonoBehaviour:
     clipNumber: 1
   - clip: {fileID: 32900000, guid: 7a4229113e98ff74ebd257350f13c3fd, type: 3}
     clipNumber: 2
+  clips:
+  - {fileID: 32900000, guid: 9da946ab5fd3b504baa90d460dad92f8, type: 3}
+  - {fileID: 32900000, guid: 7a4229113e98ff74ebd257350f13c3fd, type: 3}
   player: {fileID: 321550067}
 --- !u!4 &616556652
 Transform:
@@ -618,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   side: 1
   transition: 1
+  transitionSpeed: 1
 --- !u!1 &1582629615
 GameObject:
   m_ObjectHideFlags: 0
