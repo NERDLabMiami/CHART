@@ -6,6 +6,7 @@ using UnityEngine.Video;
 public class NavigationUI : MonoBehaviour
 {
     public GameObject backButton;                     // Reference to the back button GameObject (child of Navigation)
+  
     public CanvasGroup firstCanvasGroup;              // Reference to the first CanvasGroup (initial screen)
     public GameObject entireCanvas;                   // Reference to the entire canvas, excluding the navigation elements
     public VideoPlayer player;
