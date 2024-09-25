@@ -30,6 +30,7 @@ public class ImageZoomOut : MonoBehaviour
     {
         if (isZoomingOut)
         {
+            Debug.Log("Zooming Out");
             // Calculate the progress of the zoom-out based on the elapsed time and total duration
             zoomOutTimeElapsed += Time.deltaTime;
             float progress = zoomOutTimeElapsed / zoomOutDuration;
