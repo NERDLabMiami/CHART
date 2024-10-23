@@ -1,41 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
+using System.Collections.Generic;
 
-[System.Serializable]
-public struct Clip
-{
-    public VideoClip clip;
-    public int clipNumber;
-}
 public class VideoList : MonoBehaviour
 {
-    public List<Clip> videos;
-    public List<VideoClip> clips;
-    public VideoPlayer player;
-    // Start is called before the first frame update
+    private Chapter[] chapters;  // Array to hold all Chapter components
+    private int currentChapter = 0;  // Track the active chapter index
+    public Controls controls;  // Link to the Controls class
+
     void Start()
     {
-        
-        int clipNumber = PlayerPrefs.GetInt("clip number", 1);
-        for(int i = 0; i < videos.Count; i++)
+        // Collect all Chapter components from the children of this GameObject
+        chapters = GetComponentsInChildren<Chapter>();
+
+        // Ensure each chapter knows about this VideoList manager
+        foreach (var chapter in chapters)
         {
-            
-            if(videos[i].clipNumber == clipNumber)
-            {
-                player.clip = videos[i].clip;
-            }
-            player.Play();
+            chapter.container = this;  // Assign this VideoList instance to each chapter
         }
-    
+
+        // Initialize by playing the starting chapter
+        currentChapter = SetStartingChapter();
+        chapters[currentChapter].Play();  // Start the first (or configured) chapter
     }
 
-    // Update is called once per frame
-    void Update()
+    private int SetStartingChapter()
     {
-        
+        // Look for the first chapter marked as the starting point
+        for (int i = 0; i < chapters.Length; i++)
+        {
+            if (chapters[i].IsStartingPoint())
+                return i;
+        }
+        return 0;  // Default to the first chapter if no starting point is found
     }
 
+    public void GoToNextChapter()
+    {
+        if (currentChapter < chapters.Length - 1)
+        {
+            chapters[currentChapter].Stop();  // Stop the current chapter
+            currentChapter++;
+            chapters[currentChapter].Play();  // Play the next chapter
+        }
+    }
+
+    public void GoToPreviousChapter()
+    {
+        if (currentChapter > 0)
+        {
+            chapters[currentChapter].Stop();  // Stop the current chapter
+            currentChapter--;
+            chapters[currentChapter].Play();  // Play the previous chapter
+        }
+    }
 }

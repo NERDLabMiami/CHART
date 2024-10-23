@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Video;
 
 public class Chapter : MonoBehaviour
 {
@@ -11,34 +9,24 @@ public class Chapter : MonoBehaviour
     public TextMeshProUGUI description;
     public Image thumbnail;
     public VideoClip videoClip;
-    public Controls controls;
-    public int chapter;
+    public Controls controls;  // Reference to Controls
+    public VideoList container;  // Reference to the parent VideoList manager
+    public bool isStartingPoint = false;  // To set the starting point
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (PlayerPrefs.HasKey(title.text))
-        {
-            //HAS VISITED THIS CHAPTER. TRACK?
-        }
-        else
-        {
-        }
-    }
     public void Play()
     {
-        controls.video.clip = videoClip;
+        // Use the Controls class to start the video playback
         controls.PlayChapter(this);
     }
-    public void QueueChapter()
+
+    public void Stop()
     {
-        Debug.Log("QUEUING CHAPTER " + chapter);
-        PlayerPrefs.SetInt("chapter", chapter);
+        // Use the Controls class to stop the video playback
+        controls.StopVideo();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsStartingPoint()
     {
-        
+        return isStartingPoint;
     }
 }

@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.Video;
 using TMPro;
-using UnityEngine.EventSystems;
+using UnityEngine.Video;
 using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class Controls : MonoBehaviour
     private bool isPanelVisible = false; // Track panel visibility
 
     private CHART playerInput; // Reference to PlayerInput component
+
 
     private void Awake()
     {
@@ -43,17 +44,21 @@ public class Controls : MonoBehaviour
     {
         playerInput.Disable(); // Disable input when the object is disabled
     }
-    
     public void PlayChapter(Chapter chapter)
     {
-        Debug.Log("title changed to : " + chapter.title.text);
-        title.text = chapter.title.text;
-        video.Play();
-        
+        title.text = chapter.title.text;  // Update the UI with the chapter title
+        video.clip = chapter.videoClip;   // Load the associated video clip
+        video.Play();  // Start playing the video
     }
-    public void Pause()
+
+    public void StopVideo()
     {
-        if(video.isPlaying)
+        video.Stop();  // Stop the video playback.
+    }
+
+    public void PauseVideo()
+    {
+        if (video.isPlaying)
         {
             video.Pause();
         }
@@ -62,6 +67,7 @@ public class Controls : MonoBehaviour
             video.Play();
         }
     }
+
     // Handle tap processing in the next frame
     private IEnumerator HandleTapNextFrame()
     {
