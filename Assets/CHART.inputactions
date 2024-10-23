@@ -2,40 +2,22 @@
     "name": "CHART",
     "maps": [
         {
-            "name": "PlayerControls",
-            "id": "0732d800-ccb2-4547-9ae5-fdd1b077ea9e",
+            "name": "UI",
+            "id": "ff9ae77a-df3a-4032-b1b4-d99e162d494d",
             "actions": [
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "1ba521c5-04c7-4486-9835-987b174a8799",
-                    "expectedControlType": "Vector2",
+                    "name": "Tap",
+                    "type": "Button",
+                    "id": "1a3bdf27-bd41-4a22-a6da-a0c460d536d9",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "PinchZoom",
+                    "name": "Point",
                     "type": "Value",
-                    "id": "167239c8-adb3-48e3-9dfb-d0f1f64f2348",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Drag",
-                    "type": "Value",
-                    "id": "f3775cde-80de-42f7-b900-8d96ef5770ac",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "MouseScroll",
-                    "type": "Value",
-                    "id": "24720e92-c203-4ae1-a05e-0e5af482d7ca",
+                    "id": "5d72a50e-fc0b-454d-ad29-f9ff66b06655",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -45,56 +27,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "074dae50-2a36-4f10-a4bd-d95d4b102578",
-                    "path": "<Mouse>/delta",
+                    "id": "fefedee0-3b31-40a5-b111-920dbca1709a",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1a88607a-ee99-4fbf-a17f-47d83de99d32",
-                    "path": "<Touchscreen>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "672c8571-4044-4d6f-ba4f-076c2c2779c7",
-                    "path": "Mouse/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PinchZoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b8acea1b-f33b-4451-9f5e-97892a649941",
+                    "id": "f578b49c-0ecb-4dd1-845c-7f15e3098d36",
                     "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drag",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "908bdcb7-d747-4de9-ae57-37c4c9a55e9b",
-                    "path": "Mouse/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseScroll",
+                    "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

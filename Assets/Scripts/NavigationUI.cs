@@ -65,6 +65,7 @@ public class NavigationUI : MonoBehaviour
     // Method to handle the back button
     public void OnBackButtonPress()
     {
+        Debug.Log("Back Button Pressed!");
         if (isInVideoMode)
         {
             // If we are in video mode, return from the video
