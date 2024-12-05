@@ -13,6 +13,8 @@ public class Controls : MonoBehaviour
     public TextMeshProUGUI title;
     public VideoPlayer video;
     public GameObject navigationUI;
+    public GameObject previousChapterButton;
+    public GameObject nextChapterButton;
     [SerializeField] private RectTransform controlPanel; // Control panel to animate
     [SerializeField] private float tweenDuration = 0.5f; // Time for the animation
     [SerializeField] private float targetYPosition = 0f; // On-screen target position
@@ -34,7 +36,11 @@ public class Controls : MonoBehaviour
             offScreenPosition = new Vector2(controlPanel.anchoredPosition.x, -controlPanel.rect.height);
             controlPanel.anchoredPosition = offScreenPosition;
         }
-
+    public void ChapterControls(bool active)
+    {
+        previousChapterButton.SetActive(active);
+        nextChapterButton.SetActive(active);
+    }
     private void OnEnable()
     {
         playerInput.Enable(); // Enable input when the object is enabled

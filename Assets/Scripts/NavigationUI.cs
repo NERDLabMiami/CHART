@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.Video;
 
 public class NavigationUI : MonoBehaviour
 {
     public GameObject backButton;                     // Reference to the back button GameObject (child of Navigation)
-  
+    public TextMeshProUGUI title;                     // Reference to title of UI
     public CanvasGroup firstCanvasGroup;              // Reference to the first CanvasGroup (initial screen)
     public GameObject entireCanvas;                   // Reference to the entire canvas, excluding the navigation elements
     public VideoPlayer player;
@@ -14,6 +15,8 @@ public class NavigationUI : MonoBehaviour
     private bool isInVideoMode = false;               // Flag to track if the user is in 360 video mode
     private CanvasGroup currentCanvasGroup;           // Stores reference to the current CanvasGroup
     private Stack<CanvasGroup> canvasHistory = new Stack<CanvasGroup>();  // Stack to store the navigation history
+    private Stack<string> titleHistory = new Stack<string>();
+    private bool titleUpdated = false;
 
     private void Start()
     {
@@ -28,12 +31,27 @@ public class NavigationUI : MonoBehaviour
         backButton.SetActive(false);
     }
 
+    private void UpdateTitle(CanvasGroup canvasGroup)
+    {
+        // Get the CanvasMetadata component and set the title
+        var metadata = canvasGroup.GetComponent<CanvasMetadata>();
+        if (metadata != null)
+        {
+            title.text = metadata.CanvasTitle;
+        }
+        else
+        {
+            title.text = "Default Title"; // Fallback if no metadata is found
+        }
+    }
+
     // Call this method to navigate to a specific CanvasGroup
     public void ShowNextCanvas(CanvasGroup nextCanvasGroup)
     {
         if (currentCanvasGroup != null)
         {
             // Push the current canvas onto the stack before switching to the next one
+            titleHistory.Push(title.text); // Save current title
             canvasHistory.Push(currentCanvasGroup);
             HideCanvasGroup(currentCanvasGroup);  // Hide the current canvas
         }
@@ -41,7 +59,8 @@ public class NavigationUI : MonoBehaviour
         // Show the next CanvasGroup
         ShowCanvasGroup(nextCanvasGroup);
         currentCanvasGroup = nextCanvasGroup;
-
+        // Update the title
+        UpdateTitle(nextCanvasGroup);
         // Show the back button unless we're on the first canvas
         backButton.SetActive(canvasHistory.Count > 0);
     }
@@ -62,25 +81,39 @@ public class NavigationUI : MonoBehaviour
         isInVideoMode = true;
     }
 
-    // Method to handle the back button
     public void OnBackButtonPress()
     {
-        Debug.Log("Back Button Pressed!");
         if (isInVideoMode)
         {
-            // If we are in video mode, return from the video
             ReturnFrom360Video();
         }
         else
         {
-            // Otherwise, return to the previous canvas
-            ShowPreviousCanvas();
+            if (canvasHistory.Count > 0)
+            {
+                // Hide the current CanvasGroup
+                HideCanvasGroup(currentCanvasGroup);
+
+                // Pop the previous CanvasGroup from the stack and show it
+                CanvasGroup previousCanvasGroup = canvasHistory.Pop();
+                ShowCanvasGroup(previousCanvasGroup);
+                currentCanvasGroup = previousCanvasGroup;
+
+                // Update the title
+                UpdateTitle(previousCanvasGroup);
+
+                // Hide the back button if we're back to the first canvas
+                backButton.SetActive(canvasHistory.Count > 0);
+            }
+
         }
     }
 
     // Call this method to return from the 360 video
     public void ReturnFrom360Video()
     {
+        
+
         // Reactivate the entire canvas that was hidden
         ShowEntireCanvas();
 

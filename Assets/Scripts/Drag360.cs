@@ -20,8 +20,8 @@ public class Drag360 : MonoBehaviour
     private void OnEnable()
     {
         // Enable the Input Action Map for pointer controls (touch/mouse)
-        var pointerActionMap = inputActions.FindActionMap("PlayerControls"); // Replace with your actual action map
-        dragAction = pointerActionMap.FindAction("Look"); // Replace with your actual action name for dragging
+        var pointerActionMap = inputActions.FindActionMap("UI"); // Replace with your actual action map
+        dragAction = pointerActionMap.FindAction("Point"); // Replace with your actual action name for dragging
 
         dragAction.performed += OnDrag;
         dragAction.Enable();
