@@ -53,7 +53,7 @@ public class Controls : MonoBehaviour
     public void PlayChapter(Chapter chapter)
     {
         title.text = chapter.title.text;  // Update the UI with the chapter title
-        video.clip = chapter.videoClip;   // Load the associated video clip
+        video.Prepare();
         video.Play();  // Start playing the video
     }
 

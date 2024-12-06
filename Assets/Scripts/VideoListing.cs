@@ -9,7 +9,9 @@ public class VideoListing : MonoBehaviour
     public TextMeshProUGUI title;       // Title of the video
     public TextMeshProUGUI description; // Description of the video
     public Image thumbnail;             // Thumbnail for the video
-    public VideoClip video;             // Video clip for this listing
+    public string videoHost = "https://nerdlab.miami/chart/360/";
+
+    public string videoURL;             // Video clip for this listing
 
     public VideoPlayer player;  // Shared VideoPlayer in the scene
 
@@ -17,7 +19,8 @@ public class VideoListing : MonoBehaviour
     public void PlayVideo()
     {
         // Set the video clip to the VideoPlayer
-        player.clip = video;
+        player.url = videoHost + videoURL;
+        player.Prepare();
 
         // Optionally update the title, description, and thumbnail on the UI (if relevant)
         if (title != null)

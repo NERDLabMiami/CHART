@@ -260,7 +260,7 @@ MonoBehaviour:
   title: {fileID: 148350691}
   description: {fileID: 1437911376}
   thumbnail: {fileID: 314843699}
-  videoClip: {fileID: 32900000, guid: 7699172eba585224a88e9b0b14a0fe9c, type: 3}
+  videoURL: egmont_wildlife.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -1318,7 +1318,8 @@ MonoBehaviour:
   title: {fileID: 1639427688}
   description: {fileID: 867005592}
   thumbnail: {fileID: 35163504}
-  video: {fileID: 32900000, guid: 1975569429d9dc045bc5bd395ea89737, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_battery_mcintosh_flooded.mp4
   player: {fileID: 388759403}
 --- !u!222 &100150329
 CanvasRenderer:
@@ -1809,7 +1810,8 @@ MonoBehaviour:
   title: {fileID: 1958395049}
   description: {fileID: 2055877713}
   thumbnail: {fileID: 91577056}
-  video: {fileID: 32900000, guid: 2bad6eddd909e1a459e69fbc03089ff1, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_prison.mp4
   player: {fileID: 388759403}
 --- !u!222 &127785204
 CanvasRenderer:
@@ -2081,7 +2083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wildlife
+  m_text: Wildlife of Egmont Key
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5940914bdccbcc40afa053aaf074f7f, type: 2}
   m_sharedMaterial: {fileID: 6903587684277792607, guid: e5940914bdccbcc40afa053aaf074f7f,
@@ -4295,7 +4297,8 @@ MonoBehaviour:
   title: {fileID: 1758969810}
   description: {fileID: 352902922}
   thumbnail: {fileID: 1373994594}
-  video: {fileID: 32900000, guid: 8ed499805b2a5bc4d82702173ca6b7cf, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_fort_dade.mp4
   player: {fileID: 388759403}
 --- !u!222 &336849651
 CanvasRenderer:
@@ -5023,7 +5026,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388759401}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9da946ab5fd3b504baa90d460dad92f8, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -5077,8 +5080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invertedSphere: {fileID: 347290257}
-  rotationSpeed: 0.1
-  verticalRotationClamp: 60
+  rotationSpeed: 0.2
+  verticalRotationClamp: 90
   inputActions: {fileID: -944628639613478452, guid: 4512db057e279894a8c729c5a4c9a3b5,
     type: 3}
 --- !u!1 &414038773
@@ -5735,7 +5738,8 @@ MonoBehaviour:
   title: {fileID: 1949873162}
   description: {fileID: 1929740443}
   thumbnail: {fileID: 1557869145}
-  video: {fileID: 32900000, guid: ebdc3dad9e07814459234fcb3e8fd1c4, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_battery_mellon_top.mp4
   player: {fileID: 388759403}
 --- !u!222 &508344954
 CanvasRenderer:
@@ -6893,7 +6897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: A song by Rita Youngman (Bird Clan)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03ae39026021fb949b5456a942801925, type: 2}
   m_sharedMaterial: {fileID: 3063711228296183965, guid: 03ae39026021fb949b5456a942801925,
@@ -8852,7 +8856,8 @@ MonoBehaviour:
   title: {fileID: 2135948624}
   description: {fileID: 931882931}
   thumbnail: {fileID: 817926608}
-  video: {fileID: 32900000, guid: 1ed3cd22797bd9b47adfb73f29136647, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_power_station.mp4
   player: {fileID: 388759403}
 --- !u!222 &762446484
 CanvasRenderer:
@@ -11564,7 +11569,7 @@ MonoBehaviour:
   title: {fileID: 1676174580}
   description: {fileID: 568949327}
   thumbnail: {fileID: 366892243}
-  videoClip: {fileID: 32900000, guid: 6368f9bffb7f0904fbe71af740a6c455, type: 3}
+  videoURL: egmont_song.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -13419,7 +13424,7 @@ MonoBehaviour:
   title: {fileID: 733970613}
   description: {fileID: 1462354205}
   thumbnail: {fileID: 1022726142}
-  videoClip: {fileID: 32900000, guid: 408de01e4f6063341af804da8f884308, type: 3}
+  videoURL: egmont_chapter2.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -13649,7 +13654,8 @@ MonoBehaviour:
   title: {fileID: 807314881}
   description: {fileID: 325864249}
   thumbnail: {fileID: 1372700201}
-  video: {fileID: 32900000, guid: ab6032c8763313c42a5bb595bc874fbd, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_lighthouse.mp4
   player: {fileID: 388759403}
 --- !u!222 &1123834712
 CanvasRenderer:
@@ -14487,7 +14493,8 @@ MonoBehaviour:
   title: {fileID: 1535336738}
   description: {fileID: 1549096493}
   thumbnail: {fileID: 1117930065}
-  video: {fileID: 32900000, guid: fcc1f3d055727294d97d8da00aca69fb, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_beach.mp4
   player: {fileID: 388759403}
 --- !u!222 &1185070523
 CanvasRenderer:
@@ -16520,7 +16527,8 @@ MonoBehaviour:
   title: {fileID: 32622653}
   description: {fileID: 667049153}
   thumbnail: {fileID: 1439710581}
-  video: {fileID: 32900000, guid: 42c02a72f797b524c9dd6af9fff53fe8, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_battery_mellon_inside.mp4
   player: {fileID: 388759403}
 --- !u!222 &1392198695
 CanvasRenderer:
@@ -18982,6 +18990,7 @@ MonoBehaviour:
   navigationUI: {fileID: 1261650671}
   previousChapterButton: {fileID: 0}
   nextChapterButton: {fileID: 0}
+  videoHost: https://nerdlab.miami/chart/Videos/
   controlPanel: {fileID: 2020848882}
   tweenDuration: 0.5
   targetYPosition: 0
@@ -20421,7 +20430,7 @@ MonoBehaviour:
   title: {fileID: 65188956}
   description: {fileID: 1139693725}
   thumbnail: {fileID: 932930178}
-  videoClip: {fileID: 32900000, guid: 36c2688d7249b87449e505fd60561c5d, type: 3}
+  videoURL: egmont_chapter4.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -20570,7 +20579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seminole Song
+  m_text: Egmont Key
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5940914bdccbcc40afa053aaf074f7f, type: 2}
   m_sharedMaterial: {fileID: 6903587684277792607, guid: e5940914bdccbcc40afa053aaf074f7f,
@@ -22723,7 +22732,8 @@ MonoBehaviour:
   title: {fileID: 1564900587}
   description: {fileID: 1402423478}
   thumbnail: {fileID: 929582754}
-  video: {fileID: 32900000, guid: bce6c9d624dcecc4a8456096b051da24, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_battery_mcintosh.mp4
   player: {fileID: 388759403}
 --- !u!222 &1917996247
 CanvasRenderer:
@@ -24083,6 +24093,7 @@ MonoBehaviour:
   navigationUI: {fileID: 1261650671}
   previousChapterButton: {fileID: 1810593629}
   nextChapterButton: {fileID: 1439097947}
+  videoHost: https://nerdlab.miami/chart/Videos/
   controlPanel: {fileID: 2020848882}
   tweenDuration: 0.5
   targetYPosition: 0
@@ -24809,7 +24820,7 @@ MonoBehaviour:
   title: {fileID: 681051932}
   description: {fileID: 255680035}
   thumbnail: {fileID: 1535422709}
-  videoClip: {fileID: 32900000, guid: 1c2fd5ca93b9ebd4686372cdc00f50d0, type: 3}
+  videoURL: egmont_chapter3.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -25775,7 +25786,7 @@ MonoBehaviour:
   title: {fileID: 4394125413310846643}
   description: {fileID: 8501283814830485170}
   thumbnail: {fileID: 8325223948593401143}
-  videoClip: {fileID: 32900000, guid: 65455cad6ad795241a98e5d6196228b4, type: 3}
+  videoURL: egmont_chapter1.mp4
   controls: {fileID: 2020848883}
   container: {fileID: 0}
   isStartingPoint: 0
@@ -26532,7 +26543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Untold History of Egmont Key
+  m_text: History
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5940914bdccbcc40afa053aaf074f7f, type: 2}
   m_sharedMaterial: {fileID: 6903587684277792607, guid: e5940914bdccbcc40afa053aaf074f7f,
@@ -27481,7 +27492,8 @@ MonoBehaviour:
   title: {fileID: 4394125412172995451}
   description: {fileID: 8501283813664613242}
   thumbnail: {fileID: 8325223949717881087}
-  video: {fileID: 32900000, guid: 7b68144cc47a5af45bdb6cea6e0a032a, type: 3}
+  videoHost: https://nerdlab.miami/chart/360/
+  videoURL: egmont_battery_burchsted.mp4
   player: {fileID: 388759403}
 --- !u!1 &7644381004103686342
 GameObject:

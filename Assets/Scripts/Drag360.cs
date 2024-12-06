@@ -10,6 +10,7 @@ public class Drag360 : MonoBehaviour
     public float verticalRotationClamp = 60f; // Clamp for vertical rotation
 
     private InputAction dragAction; // Input Action for drag
+    private Vector2 lastPointerPosition;
     private Vector2 dragDelta;
     private float xRotation = 0f;
     private float yRotation = 0f;
@@ -17,44 +18,42 @@ public class Drag360 : MonoBehaviour
     // Reference to the InputActionAsset (generated from Input Actions)
     public InputActionAsset inputActions;
 
-    private void OnEnable()
+    private void Start()
     {
-        // Enable the Input Action Map for pointer controls (touch/mouse)
+        Vector3 initialRotation = Camera.main.transform.localEulerAngles;
+        xRotation = initialRotation.x;
+        yRotation = initialRotation.y;
         var pointerActionMap = inputActions.FindActionMap("UI"); // Replace with your actual action map
+        if(pointerActionMap == null)
+        {
+            Debug.Log("Action Map Not Found");
+            return;
+        }
         dragAction = pointerActionMap.FindAction("Point"); // Replace with your actual action name for dragging
-
-        dragAction.performed += OnDrag;
+        if(dragAction == null)
+        {
+            Debug.Log("Action Map Point not found in UI");
+            return;
+        }
         dragAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        // Disable and unsubscribe
-        dragAction.performed -= OnDrag;
-        dragAction.Disable();
-    }
-
-    private void OnDrag(InputAction.CallbackContext context)
-    {
-        // Get the drag delta (from mouse or touch)
-        dragDelta = context.ReadValue<Vector2>();
-
-        // Apply the rotation based on the delta
-        float rotationX = dragDelta.x * rotationSpeed;
-        float rotationY = dragDelta.y * rotationSpeed;
-
-        xRotation += rotationX;
-        yRotation -= rotationY;
-
-        // Clamp the vertical rotation to prevent flipping
-        yRotation = Mathf.Clamp(yRotation, -verticalRotationClamp, verticalRotationClamp);
-
-        // Apply the rotation to the camera
-        Camera.main.transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
     }
 
     void Update()
     {
-        // If needed, you can add additional logic to control input in Update
+        if (dragAction == null) return;
+
+        Vector2 currentPointerPosition = dragAction.ReadValue<Vector2>();
+
+        if(lastPointerPosition != Vector2.zero)
+        {
+            Vector2 dragDelta = currentPointerPosition - lastPointerPosition;
+            float deltaX = dragDelta.x * rotationSpeed;
+            float deltaY = dragDelta.y * rotationSpeed;
+            xRotation += deltaX;
+            yRotation -= deltaY;
+            yRotation = Mathf.Clamp(yRotation, -verticalRotationClamp, verticalRotationClamp);
+            Camera.main.transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
+        }
+        lastPointerPosition = currentPointerPosition;
     }
 }
