@@ -1905,12 +1905,12 @@ GameObject:
   - component: {fileID: 137487486}
   - component: {fileID: 137487487}
   m_Layer: 5
-  m_Name: Categories
+  m_Name: Egmont Key Categories
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &137487482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2221,13 +2221,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189382436}
+  - component: {fileID: 189382438}
+  - component: {fileID: 189382437}
   m_Layer: 5
   m_Name: Egmont Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &189382436
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2252,6 +2254,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &189382437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189382435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09fda41efbe1d1d42ae03cdfc6adc393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasTitle: Egmont Key
+--- !u!225 &189382438
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189382435}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &191377146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5262224903192789851, guid: a181db13098b2034ca38a1db71d5a744,
@@ -28650,18 +28677,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1204809996}
-        m_TargetAssemblyTypeName: NavigationUI, Assembly-CSharp
-        m_MethodName: SetTitle
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Egmont Key
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!224 &9015621136188065032
